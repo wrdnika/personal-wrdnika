@@ -1,68 +1,8 @@
 import React, { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import { SiGithub, SiInstagram, SiGmail, SiWhatsapp } from "react-icons/si";
-
-// Shared animation transition
-const BLOB_TRANSITION = {
-  duration: 10,
-  repeat: Infinity,
-  repeatType: "mirror",
-  ease: "linear",
-};
-
-// Definitions for aurora blobs
-const AURORA_BLOBS = [
-  {
-    className:
-      "absolute top-0 -left-4 w-80 h-80 rounded-full filter blur-2xl opacity-70 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light bg-gradient-to-tr from-green-300 via-blue-400 to-purple-500",
-    animate: {
-      translateX: [0, 40, -40, 0],
-      translateY: [0, 30, -30, 0],
-    },
-    transition: { ...BLOB_TRANSITION, delay: 0 },
-  },
-  {
-    className:
-      "absolute top-0 -right-4 w-80 h-80 rounded-full filter blur-2xl opacity-70 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light bg-gradient-to-br from-yellow-300 via-red-400 to-pink-500",
-    animate: {
-      translateX: [0, -40, 40, 0],
-      translateY: [0, -30, 30, 0],
-    },
-    transition: { ...BLOB_TRANSITION, delay: 2 },
-  },
-  {
-    className:
-      "absolute -bottom-0 left-20 w-80 h-80 rounded-full filter blur-2xl opacity-70 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light bg-gradient-to-tl from-blue-300 via-indigo-400 to-pink-600",
-    animate: {
-      translateX: [0, 30, -30, 0],
-      translateY: [0, 35, -35, 0],
-    },
-    transition: { ...BLOB_TRANSITION, delay: 4 },
-  },
-  {
-    className:
-      "absolute -bottom-0 right-20 w-80 h-80 rounded-full filter blur-2xl opacity-70 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light bg-gradient-to-t from-green-300 via-teal-400 to-blue-600",
-    animate: {
-      translateX: [0, -30, 30, 0],
-      translateY: [0, -35, 35, 0],
-    },
-    transition: { ...BLOB_TRANSITION, delay: 6 },
-  },
-];
-
-const Aurora = memo(() => (
-  <div className="absolute inset-0 overflow-hidden -z-10">
-    {AURORA_BLOBS.map((blob, idx) => (
-      <motion.div
-        key={idx}
-        className={blob.className}
-        style={{ willChange: "transform" }}
-        animate={blob.animate}
-        transition={blob.transition}
-      />
-    ))}
-  </div>
-));
+import WordRotate from "./bits/WordRotate";
+import Silk from "./bits/Silk";
 
 // Profile image
 const ProfileImage = memo(() => (
@@ -130,7 +70,9 @@ const Hero = () => {
       id="hero"
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-12 bg-white/5 dark:bg-black/5 backdrop-blur-sm"
     >
-      <Aurora />
+      <div className="absolute inset-0 -z-10">
+        <Silk />
+      </div>
 
       <div className="z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 backdrop-blur-lg bg-black/5 dark:bg-black/20 rounded-3xl p-8 md:p-12 shadow-lg border border-white/20 dark:border-white/10">
         <div
@@ -151,10 +93,19 @@ const Hero = () => {
             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
               Hi, I'm Muhamad Andika Wardana
             </h1>
-            <p className="text-lg md:text-xl mb-6">
-              A passionate{" "}
-              <span className="font-semibold">Fullstack Developer</span>
-            </p>
+            <div className="flex items-center justify-center md:justify-start">
+              <p className="text-lg md:text-xl mb-6 font-semibold mr-2">
+                A passionate
+              </p>
+              <WordRotate
+                words={[
+                  "Fullstack Developer",
+                  "Frontend Developer",
+                  "Backend Developer",
+                ]}
+                className="text-lg md:text-xl mb-6 font-semibold"
+              />
+            </div>
             <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
               <a
                 href="#contact"
