@@ -9,7 +9,6 @@ import Skills from "./components/Skills";
 import PersonalExperience from "./components/PersonalExperience";
 import WorkExperience from "./components/WorkExperience";
 import Certification from "./components/Certification";
-import SplashCursor from './components/SplashCursor';
 
 // Animation variant for sections
 const SECTION_VARIANT = {
@@ -96,13 +95,11 @@ export default function App() {
   );
 
   return (
-    
     <div
       className={
         darkMode ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"
       }
     >
-      <SplashCursor />
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <ScrollProgress progress={scrollProgress} />
 
