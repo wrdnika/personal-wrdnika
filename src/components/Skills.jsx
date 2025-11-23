@@ -1,5 +1,4 @@
-import React, { memo, useMemo } from "react";
-import Tilt from "react-parallax-tilt";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import {
   SiHtml5,
@@ -21,30 +20,29 @@ import {
   SiGithub,
   SiGitlab,
 } from "react-icons/si";
+import LogoLoop from "./bits/LogoLoop";
 
-// Tech stack icons list
-const TECH_STACK = [
-  { icon: <SiHtml5 />, name: "HTML5" },
-  { icon: <SiCss3 />, name: "CSS3" },
-  { icon: <SiJavascript />, name: "JavaScript" },
-  { icon: <SiBootstrap />, name: "Bootstrap" },
-  { icon: <SiTailwindcss />, name: "Tailwind CSS" },
-  { icon: <SiReact />, name: "React.js" },
-  { icon: <SiVuedotjs />, name: "Vue.js" },
-  { icon: <SiExpress />, name: "Express.js" },
-  { icon: <SiVite />, name: "Vite" },
-  { icon: <SiLaravel />, name: "Laravel" },
-  { icon: <SiPostman />, name: "Postman" },
-  { icon: <SiFlutter />, name: "Flutter" },
-  { icon: <SiSupabase />, name: "Supabase" },
-  { icon: <SiMysql />, name: "MySQL" },
-  { icon: <SiMongodb />, name: "MongoDB" },
-  { icon: <SiNodedotjs />, name: "Node.js" },
-  { icon: <SiGithub />, name: "GitHub" },
-  { icon: <SiGitlab />, name: "GitLab" },
+const techLogos = [
+  { node: <SiHtml5 />, title: "HTML5" },
+  { node: <SiCss3 />, title: "CSS3" },
+  { node: <SiJavascript />, title: "JavaScript" },
+  { node: <SiBootstrap />, title: "Bootstrap" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS" },
+  { node: <SiReact />, title: "React.js" },
+  { node: <SiVuedotjs />, title: "Vue.js" },
+  { node: <SiExpress />, title: "Express.js" },
+  { node: <SiVite />, title: "Vite" },
+  { node: <SiLaravel />, title: "Laravel" },
+  { node: <SiPostman />, title: "Postman" },
+  { node: <SiFlutter />, title: "Flutter" },
+  { node: <SiSupabase />, title: "Supabase" },
+  { node: <SiMysql />, title: "MySQL" },
+  { node: <SiMongodb />, title: "MongoDB" },
+  { node: <SiNodedotjs />, title: "Node.js" },
+  { node: <SiGithub />, title: "GitHub" },
+  { node: <SiGitlab />, title: "GitLab" },
 ];
 
-// Section variants dengan linear easing
 const SECTION_VARIANTS = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -54,47 +52,7 @@ const SECTION_VARIANTS = {
   },
 };
 
-// Grid wrapper memasang staggerChildren
-const GRID_VARIANTS = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.07,
-    },
-  },
-};
-
-// Icon variants dengan spring dan GPU hint
-const ICON_VARIANTS = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 200,
-      damping: 20,
-    },
-  },
-};
-
-// Tilt default props
-const TILT_PROPS = {
-  tiltMaxAngleX: 15,
-  tiltMaxAngleY: 15,
-  perspective: 1000,
-  transitionSpeed: 1500,
-  scale: 1.02,
-  glareEnable: true,
-  glareMaxOpacity: 0.35,
-  glareBorderRadius: "20px",
-  glareColor: "#ffffff",
-  glarePosition: "all",
-};
-
 const Skills = () => {
-  const techItems = useMemo(() => TECH_STACK, []);
-
   return (
     <motion.section
       id="skills"
@@ -120,37 +78,20 @@ const Skills = () => {
         Here are the technologies and tools I use in web and app development.
       </p>
 
-      <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-6 justify-items-center"
-        variants={GRID_VARIANTS}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {techItems.map(({ icon, name }, i) => (
-          <Tilt key={name} className="cursor-pointer mx-auto" {...TILT_PROPS}>
-            <motion.div
-              variants={ICON_VARIANTS}
-              className="
-                flex flex-col items-center gap-2
-                w-28 h-28 p-4
-                backdrop-blur-md bg-white/10 dark:bg-white/5
-                border border-white/10 rounded-2xl
-                shadow-md
-                hover:rotate-[2deg] hover:scale-110
-                transition-transform duration-300 ease-linear
-              "
-              style={{
-                willChange: "transform, opacity",
-                transform: "translateZ(0)",
-              }}
-            >
-              <div className="text-4xl">{icon}</div>
-              <span className="text-sm text-center">{name}</span>
-            </motion.div>
-          </Tilt>
-        ))}
-      </motion.div>
+      <div style={{ height: '200px', position: 'relative', overflow: 'hidden'}}>
+        <LogoLoop
+          logos={techLogos}
+          speed={120}
+          direction="left"
+          logoHeight={48}
+          gap={40}
+          hoverSpeed={0}
+          scaleOnHover
+          fadeOut
+          fadeOutColor="#111827"
+          ariaLabel="Technology partners"
+        />
+      </div>
     </motion.section>
   );
 };
